@@ -2,6 +2,7 @@
   /* light theme colors */
   --lightgrey: #fafafa;
   --lightgrey2: #eceaea;
+  --lightgrey3: #ebe8e8;
   --grey: #bdbec2;
   --darkgrey: #cfcfcf;
   --darkgrey2: rgb(82, 79, 79);
@@ -27,6 +28,8 @@ body.theme-light {
   --icon-color: var(--black);
   --model-background: var(--white);
   --settings-dropdown-background: var(--white);
+  --topbar-background: var(--lightgrey3);
+  --form-control-border-color: var(--lightgrey3);
 }
 
 body.theme-dark {
@@ -36,10 +39,12 @@ body.theme-dark {
   --explorer-resize-color: var(--teal);
   --explorer-active-file-background-color: var(--darkgreen);
   --editor-area-background: var(--darkblue);
-  --text-color: var(--white);
-  --icon-color: var(--white);
-  --model-background: var(--darkgreen);
+  --text-color: var(--grey);
+  --icon-color: var(--grey);
+  --model-background: var(--darkblue);
   --settings-dropdown-background: var(--teal);
+  --topbar-background: var(--darkgreen);
+  --form-control-border-color: var(--darkgreen);
 }
 
 body {
@@ -47,6 +52,7 @@ body {
   height: 100vh;
   color: var(--text-color);
 }
+
 .container-fluid {
   display: flex;
   height: 100%;
@@ -112,10 +118,34 @@ i {
   background-color: var(--model-background);
 }
 
+.theme-dark .modal-content .modal-header {
+  border-bottom-color: var(--darkgreen);
+}
+
+.theme-dark .modal-content .modal-footer {
+  border-top-color: var(--darkgreen);
+}
+
 .dropdown-menu {
   background-color: var(--settings-dropdown-background);
 }
 
 .tab-section {
-  border-bottom: 1px solid #ebe8e8;
+  background-color: var(--topbar-background);
+}
+
+.tab-section #activeFileTab {
+  border-right: 1px solid var(--white);
+  display: inline-block;
+}
+
+.form-control {
+  border: 1px solid var(--form-control-border-color);
+}
+
+#toastSection {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 999;
 }

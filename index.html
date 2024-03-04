@@ -51,15 +51,8 @@
       </div>
       <div class="resize" id="resize"></div>
       <div class="right">
-        <div class="d-flex align-items-center tab-section">
-          <div
-            id="activeFileTab"
-            class="ps-2"
-            style="
-              border-right: 1px solid rgb(235, 232, 232);
-              display: inline-block;
-            "
-          ></div>
+        <div class="d-flex align-items-center tab-section mb-2">
+          <div id="activeFileTab" class="ps-2"></div>
 
           <div class="btn-group ms-auto py-1">
             <button
@@ -93,7 +86,10 @@
                 </span>
               </li>
               <li>
-                <a class="dropdown-item" target="_blank" href="google.com"
+                <a
+                  class="dropdown-item"
+                  target="_blank"
+                  href="https://github.com/prijal-bista/base-64-encoder-and-decoder"
                   ><i class="fa-brands fa-xs fa-github"></i> Link to source</a
                 >
               </li>
@@ -130,7 +126,7 @@
                 </div>
                 <textarea
                   placeholder="Normal text"
-                  class="form-control text-area"
+                  class="form-control shadow-none text-area"
                   name="normalText"
                   id="normalText"
                 ></textarea>
@@ -164,7 +160,7 @@
                 </div>
                 <textarea
                   placeholder="Base 64 encoded text"
-                  class="form-control text-area"
+                  class="form-control shadow-none text-area"
                   name="base64EncodedText"
                   id="base64EncodedText"
                 ></textarea>
@@ -199,7 +195,7 @@
           <div class="modal-body">
             <input
               required
-              class="form-control"
+              class="form-control shadow-none"
               type="text"
               id="newFileNameInput"
               placeholder="File Name"
@@ -218,6 +214,8 @@
       </div>
     </div>
 
+    <div id="toastSection"></div>
+
     <!-- bootstrap js -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -226,6 +224,6 @@
     ></script>
 
     <!-- script -->
-    <script defer src="script2.js"></script>
+    <script defer src="script.js"></script>
   </body>
 </html>
