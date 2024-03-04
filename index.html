@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Base64 Encoder/Decoder</title>
+
+    <!-- bootstrap css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <!-- fontawesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- styles -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="body">
+    <div class="container-fluid">
+      <div class="left">
+        <div class="d-flex align-items-center explorer">
+          <p class="mb-0 ps-1">
+            <small>EXPLORER</small>
+          </p>
+          <button
+            class="ms-auto btn btn-small btn-text"
+            data-bs-toggle="modal"
+            data-bs-target="#createNewFileModal"
+          >
+            <i
+              class="fa-solid fa-xs fa-file-circle-plus"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              title="Create new file"
+            ></i>
+          </button>
+        </div>
+        <ul class="p-0" id="fileNameTabs"></ul>
+      </div>
+      <div class="resize" id="resize"></div>
+      <div class="right">
+        <div class="d-flex align-items-center tab-section">
+          <div
+            id="activeFileTab"
+            class="ps-2"
+            style="
+              border-right: 1px solid rgb(235, 232, 232);
+              display: inline-block;
+            "
+          ></div>
+
+          <div class="btn-group ms-auto py-1">
+            <button
+              type="button"
+              class="btn btn-sm dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fa-solid fa-xs fa-gear"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="theme-toggler">
+                  <button
+                    onclick="setDarkTheme()"
+                    class="btn btn-small btn-text"
+                  >
+                    <i class="fa-solid fa-xs fa-moon"></i>
+                  </button>
+                  <button
+                    onclick="setLightTheme()"
+                    class="btn btn-small btn-text"
+                  >
+                    <i class="fa-solid fa-xs fa-sun"></i>
+                  </button>
+                </div>
+              </li>
+              <li>
+                <span class="dropdown-item" onclick="clearAllData()">
+                  <i class="fa-solid fa-xs fa-broom"></i> Clear all data
+                </span>
+              </li>
+              <li>
+                <a class="dropdown-item" target="_blank" href="google.com"
+                  ><i class="fa-brands fa-xs fa-github"></i> Link to source</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="editor-section px-2 pb-2">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <div class="d-flex align-items-center">
+                  <label for="normalText" class="fw-bold">
+                    Normal Text
+                    <button
+                      class="btn btn-text"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Copy normal text to clipboard"
+                      onclick="copyToClipboard('normal')"
+                    >
+                      <i class="fa-solid fa-xs fa-copy"></i>
+                    </button>
+                  </label>
+                  <div class="py-1 ms-auto">
+                    <button
+                      class="btn btn-small btn-outline-success"
+                      id="base64-encode-btn"
+                      onclick="convertToBase64EncodedString()"
+                    >
+                      <i class="fa-solid fa-xs fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <textarea
+                  placeholder="Normal text"
+                  class="form-control text-area"
+                  name="normalText"
+                  id="normalText"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <div class="d-flex align-items-center">
+                  <div class="py-1 me-auto">
+                    <button
+                      id="base64-decode-btn"
+                      class="btn btn-small btn-outline-success"
+                      id="base64-encode-btn"
+                      onclick="convertToNormalString()"
+                    >
+                      <i class="fa-solid fa-xs fa-arrow-left"></i>
+                    </button>
+                  </div>
+                  <label for="base64EncodedText" class="fw-bold">
+                    Base 64
+                    <button
+                      class="btn btn-text"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Copy base64 to clipboard"
+                      onclick="copyToClipboard('base64')"
+                    >
+                      <i class="fa-solid fa-xs fa-copy"></i>
+                    </button>
+                  </label>
+                </div>
+                <textarea
+                  placeholder="Base 64 encoded text"
+                  class="form-control text-area"
+                  name="base64EncodedText"
+                  id="base64EncodedText"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create New File Modal -->
+    <div
+      class="modal fade"
+      id="createNewFileModal"
+      tabindex="-1"
+      aria-labelledby="createNewFileModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="createNewFileModalLabel">
+              Create New File
+            </h6>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              required
+              class="form-control"
+              type="text"
+              id="newFileNameInput"
+              placeholder="File Name"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              id="add-new-file-btn"
+              class="btn btn-outline-success"
+              onclick="addNewFile()"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- script -->
+    <script defer src="script2.js"></script>
+  </body>
+</html>

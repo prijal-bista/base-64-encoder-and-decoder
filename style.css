@@ -1,0 +1,121 @@
+:root {
+  /* light theme colors */
+  --lightgrey: #fafafa;
+  --lightgrey2: #eceaea;
+  --grey: #bdbec2;
+  --darkgrey: #cfcfcf;
+  --darkgrey2: rgb(82, 79, 79);
+  --black: #000;
+
+  /* dark theme colors */
+  --darkblue: #040d12;
+  --darkgreen: #183d3d;
+  --teal: #5c8374;
+  --lightteal: #93b1a6;
+  --white: #fff;
+}
+
+/* theming */
+body.theme-light {
+  --explorer-header-background: var(--lightgrey2);
+  --explorer-header-border-bottom-color: var(--darkgrey2);
+  --explorer-area-background: var(--lightgrey);
+  --explorer-resize-color: var(--grey);
+  --explorer-active-file-background-color: var(--darkgrey);
+  --editor-area-background: var(--white);
+  --text-color: var(--black);
+  --icon-color: var(--black);
+  --model-background: var(--white);
+  --settings-dropdown-background: var(--white);
+}
+
+body.theme-dark {
+  --explorer-header-background: var(--teal);
+  --explorer-header-border-bottom-color: var(--darkgrey2);
+  --explorer-area-background: var(--darkblue);
+  --explorer-resize-color: var(--teal);
+  --explorer-active-file-background-color: var(--darkgreen);
+  --editor-area-background: var(--darkblue);
+  --text-color: var(--white);
+  --icon-color: var(--white);
+  --model-background: var(--darkgreen);
+  --settings-dropdown-background: var(--teal);
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  color: var(--text-color);
+}
+.container-fluid {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.left {
+  background-color: var(--explorer-area-background);
+  width: 200px;
+}
+
+.resize {
+  background: var(--explorer-resize-color);
+  height: 100%;
+  width: 2px;
+  cursor: col-resize;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.right {
+  flex-grow: 1;
+  background-color: var(--editor-area-background);
+}
+
+.text-area {
+  height: 82vh;
+  color: var(--text-color);
+  background-color: var(--editor-area-background);
+}
+
+.text-area:focus {
+  color: var(--text-color);
+  background-color: var(--editor-area-background);
+}
+
+input#newFileNameInput {
+  background-color: var(--model-background);
+  color: var(--text-color);
+}
+
+input#newFileNameInput:focus {
+  outline: none;
+}
+
+div.explorer {
+  background-color: var(--explorer-header-background);
+  border-bottom: 1px solid var(--explorer-header-border-bottom-color);
+}
+
+li.isActive {
+  background-color: var(--explorer-active-file-background-color);
+}
+
+i {
+  color: var(--icon-color);
+}
+
+.modal-content {
+  background-color: var(--model-background);
+}
+
+.dropdown-menu {
+  background-color: var(--settings-dropdown-background);
+}
+
+.tab-section {
+  border-bottom: 1px solid #ebe8e8;
+}
