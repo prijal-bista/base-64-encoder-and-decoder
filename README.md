@@ -1,3 +1,7 @@
+<p align="center">
+  <img style="border-radius: 8px" height="60" src="logo.png">
+</p>
+
 #### Simple and fully client side base64 encoder and decoder powered by js on browser
 
 > This is a simple tool to convert your normal text to base64 and vice versa.
