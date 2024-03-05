@@ -99,7 +99,7 @@
 
         <div class="editor-section px-2 pb-2">
           <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
               <div class="form-group">
                 <div class="d-flex align-items-center">
                   <label for="normalText" class="fw-bold">
@@ -132,19 +132,9 @@
                 ></textarea>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
               <div class="form-group">
                 <div class="d-flex align-items-center">
-                  <div class="py-1 me-auto">
-                    <button
-                      id="base64-decode-btn"
-                      class="btn btn-small btn-outline-success"
-                      id="base64-encode-btn"
-                      onclick="convertToNormalString()"
-                    >
-                      <i class="fa-solid fa-xs fa-arrow-left"></i>
-                    </button>
-                  </div>
                   <label for="base64EncodedText" class="fw-bold">
                     Base 64
                     <button
@@ -157,6 +147,16 @@
                       <i class="fa-solid fa-xs fa-copy"></i>
                     </button>
                   </label>
+                  <div class="py-1 ms-auto">
+                    <button
+                      id="base64-decode-btn"
+                      class="btn btn-small btn-outline-success"
+                      id="base64-encode-btn"
+                      onclick="convertToNormalString()"
+                    >
+                      <i class="fa-solid fa-xs fa-arrow-left"></i>
+                    </button>
+                  </div>
                 </div>
                 <textarea
                   placeholder="Base 64 encoded text"

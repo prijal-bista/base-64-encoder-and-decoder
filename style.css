@@ -149,3 +149,17 @@ i {
   left: 8px;
   z-index: 999;
 }
+
+@media screen and (max-width: 767px) {
+  .left {
+    width: 100px;
+  }
+  .text-area {
+    height: 35vh;
+  }
+
+  #base64-encode-btn,
+  #base64-decode-btn {
+    transform: rotate(90deg);
+  }
+}

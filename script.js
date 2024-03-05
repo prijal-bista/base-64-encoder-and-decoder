@@ -158,7 +158,7 @@ const renderEnvironment = (files, activeFileName = null) => {
     li.className = "px-2 py-0 d-flex align-items-center";
     li.style.cursor = "pointer";
 
-    li.innerHTML = `<small class="me-auto">${file.name}</small>`;
+    li.innerHTML = `<small class="me-auto text-truncate">${file.name}</small>`;
 
     li.onclick = () => {
       setActiveFile(file.name);
