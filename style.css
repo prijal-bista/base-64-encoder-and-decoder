@@ -150,6 +150,10 @@ i {
   z-index: 999;
 }
 
+.clear-data {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
   .left {
     width: 100px;
