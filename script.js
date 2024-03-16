@@ -1,5 +1,5 @@
 const defaultFile = {
-  name: "file1",
+  name: "untitled",
   base64EncodedText: "",
   normalText: "",
 };
@@ -50,7 +50,9 @@ const setLightTheme = () => {
 let files = [];
 
 const loadFilesFromStorage = () => {
-  return JSON.parse(localStorage.getItem("files")) ?? [];
+  return JSON.parse(localStorage.getItem("files"))?.length
+    ? JSON.parse(localStorage.getItem("files"))
+    : [{ ...defaultFile }];
 };
 
 const storeFilesToStorage = (files) => {
@@ -115,7 +117,8 @@ const deleteFile = (fileName) => {
   if (confirm(lang.CONFIRM_REMOVE(fileName))) {
     files.splice(index, 1);
     storeFilesToStorage(files);
-    renderEnvironment(files);
+    files = loadFilesFromStorage();
+    renderEnvironment(files, files?.[0]?.name);
   }
 };
 
@@ -214,7 +217,7 @@ const renderEnvironment = (files, activeFileName = null) => {
 const initializeEnvironment = () => {
   body.classList.add(loadThemePreferenceFromStorage());
   files = loadFilesFromStorage();
-  renderEnvironment(files);
+  renderEnvironment(files, files?.[0]?.name);
 };
 
 initializeEnvironment();
