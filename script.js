@@ -123,6 +123,7 @@ const renameFile = () => {
 };
 
 const setActiveFile = (fileName) => {
+  activeFileTab.setAttribute("data-activefile", fileName || "");
   renderEnvironment(files, fileName);
 };
 
@@ -171,7 +172,10 @@ const convertToBase64EncodedString = () => {
   if (!normalText) return;
   base64EncodedTextTextArea.value = btoa(normalText);
   // save to file after conversion
-  saveFile(activeFileTab.dataset.activefile);
+  const activeFile = activeFileTab.dataset.activefile;
+  if (activeFile) {
+    saveFile(activeFile);
+  }
 };
 
 const convertToNormalString = () => {
@@ -179,7 +183,10 @@ const convertToNormalString = () => {
   if (!base64EncodedText) return;
   normalTextTextArea.value = atob(base64EncodedText);
   // save to file after conversion
-  saveFile(activeFileTab.dataset.activefile);
+  const activeFile = activeFileTab.dataset.activefile;
+  if (activeFile) {
+    saveFile(activeFile);
+  }
 };
 
 const throwError = (errorMessage) => {
