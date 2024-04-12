@@ -19,8 +19,12 @@ const base64EncodedTextTextArea = document.getElementById("base64EncodedText");
 const fileNameTabList = document.getElementById("fileNameTabs");
 const activeFileTab = document.getElementById("activeFileTab");
 const newFileNameInput = document.getElementById("newFileNameInput");
+const renameFileNameInput = document.getElementById("renameFileNameInput");
 const createNewFileModal = bootstrap.Modal.getOrCreateInstance(
   document.querySelector("#createNewFileModal")
+);
+const editFileModal = new bootstrap.Modal(
+  document.getElementById("renameNewFileModal")
 );
 const body = document.getElementById("body");
 const toastSection = document.getElementById("toastSection");
@@ -84,6 +88,37 @@ const addNewFile = () => {
   createNewFileModal.hide();
 
   renderEnvironment(files, fileName);
+};
+
+const renameFile = () => {
+  const newFileName = renameFileNameInput.value;
+  const oldFileName = renameFileNameInput.dataset.oldfilename;
+  if (newFileName === oldFileName) {
+    editFileModal.hide();
+    return;
+  }
+
+  const index = files.findIndex((el) => el.name === oldFileName);
+  if (index === -1) {
+    console.warn(lang.FIELD_NOT_FOUND("File"));
+    return;
+  }
+
+  if (files.findIndex((file) => file.name === newFileName) !== -1) {
+    throwError(lang.FIELD_UNIQUE("File name"));
+    return;
+  }
+
+  files[index].name = newFileName;
+  storeFilesToStorage(files);
+
+  // reset input and close create new file modal
+  renameFileNameInput.setAttribute("data-oldfilename", "");
+  renameFileNameInput.value = "";
+
+  editFileModal.hide();
+
+  renderEnvironment(files, newFileName);
 };
 
 const setActiveFile = (fileName) => {
@@ -171,9 +206,24 @@ const renderEnvironment = (files, activeFileName = null) => {
     if (activeFileName && file.name == activeFileName) {
       li.classList.add("isActive");
 
+      // edit btn
+      const editBtn = document.createElement("button");
+      editBtn.innerHTML = `<i class="fa-solid fa-xs fa-pencil"></i>`;
+      editBtn.className = "btn btn-sm btn-text";
+      editBtn.title = "Rename File";
+      editBtn.onclick = (e) => {
+        e.stopPropagation();
+        renameFileNameInput.setAttribute("data-oldfilename", file.name);
+        renameFileNameInput.value = file.name;
+        editFileModal.show();
+      };
+
+      li.appendChild(editBtn);
+
       const btn = document.createElement("button");
       btn.innerHTML = `<i class="fa-solid fa-xs fa-floppy-disk"></i>`;
       btn.className = "btn btn-sm btn-text";
+      btn.title = "Save File";
 
       btn.onclick = () => {
         saveFile(file.name);
@@ -189,6 +239,7 @@ const renderEnvironment = (files, activeFileName = null) => {
     const btn = document.createElement("button");
     btn.innerHTML = `<i class="fa-solid fa-xs fa-trash"></i>`;
     btn.className = "btn btn-sm btn-text";
+    btn.title = "Delete File";
 
     btn.onclick = (e) => {
       e.stopPropagation();

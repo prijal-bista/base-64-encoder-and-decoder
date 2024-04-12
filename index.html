@@ -217,6 +217,49 @@
       </div>
     </div>
 
+    <!-- Edit File Modal -->
+    <div
+      class="modal fade"
+      id="renameNewFileModal"
+      tabindex="-1"
+      aria-labelledby="renameNewFileModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="renameNewFileModalLabel">
+              Rename File
+            </h6>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input
+              required
+              class="form-control shadow-none"
+              type="text"
+              id="renameFileNameInput"
+              placeholder="File Name"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              id="add-new-file-btn"
+              class="btn btn-outline-success"
+              onclick="renameFile()"
+            >
+              Rename
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="toastSection"></div>
 
     <!-- bootstrap js -->

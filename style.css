@@ -92,12 +92,14 @@ body {
   background-color: var(--editor-area-background);
 }
 
-input#newFileNameInput {
+input#newFileNameInput,
+input#renameFileNameInput {
   background-color: var(--model-background);
   color: var(--text-color);
 }
 
-input#newFileNameInput:focus {
+input#newFileNameInput:focus,
+input#renameFileNameInput:focus {
   outline: none;
 }
 
