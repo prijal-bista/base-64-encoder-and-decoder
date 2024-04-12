@@ -5,7 +5,8 @@ const defaultFile = {
 };
 
 const lang = {
-  FILE_SAVED_SUCCESSFULLY: (fileName) => `${fileName} saved successfully`,
+  FILE_SAVED_SUCCESSFULLY: (fileName) =>
+    `Contents saved to ${fileName} successfully`,
   COPIED_TO_CLIPBOARD: (type) => `${type} text copied to clipboard`,
   FIELD_REQUIRED: (fieldName) => `${fieldName} is required`,
   FIELD_UNIQUE: (fieldName) => `${fieldName} must be unique`,
@@ -169,12 +170,16 @@ const convertToBase64EncodedString = () => {
   const normalText = normalTextTextArea.value;
   if (!normalText) return;
   base64EncodedTextTextArea.value = btoa(normalText);
+  // save to file after conversion
+  saveFile(activeFileTab.dataset.activefile);
 };
 
 const convertToNormalString = () => {
   const base64EncodedText = base64EncodedTextTextArea.value;
   if (!base64EncodedText) return;
   normalTextTextArea.value = atob(base64EncodedText);
+  // save to file after conversion
+  saveFile(activeFileTab.dataset.activefile);
 };
 
 const throwError = (errorMessage) => {
@@ -253,6 +258,7 @@ const renderEnvironment = (files, activeFileName = null) => {
 
   if (activeFileName) {
     // set active file tab
+    activeFileTab.setAttribute("data-activefile", activeFileName);
     activeFileTab.innerHTML = `
     <small>${activeFileName}</small>
     <button class="btn btn-small btn-text" onclick="setActiveFile(null)">
