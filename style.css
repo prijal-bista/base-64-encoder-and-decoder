@@ -156,6 +156,10 @@ i {
   cursor: pointer;
 }
 
+.char-length p {
+  font-size: 14px;
+}
+
 @media screen and (max-width: 767px) {
   .left {
     width: 100px;

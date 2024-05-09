@@ -21,6 +21,8 @@ const fileNameTabList = document.getElementById("fileNameTabs");
 const activeFileTab = document.getElementById("activeFileTab");
 const newFileNameInput = document.getElementById("newFileNameInput");
 const renameFileNameInput = document.getElementById("renameFileNameInput");
+const base64EncodedTextCharCount = document.getElementById('base64EncodedTextCharCount')
+
 const createNewFileModal = bootstrap.Modal.getOrCreateInstance(
   document.querySelector("#createNewFileModal")
 );
@@ -50,6 +52,11 @@ const setLightTheme = () => {
   body.classList.remove("theme-dark");
   body.classList.add("theme-light");
 };
+
+const setCharCount = () => {
+  base64EncodedTextCharCount.innerText = base64EncodedTextTextArea?.value?.length || 0;
+}
+
 
 // state
 let files = [];
@@ -176,6 +183,7 @@ const convertToBase64EncodedString = () => {
   if (activeFile) {
     saveFile(activeFile);
   }
+  setCharCount();
 };
 
 const convertToNormalString = () => {
@@ -275,6 +283,8 @@ const renderEnvironment = (files, activeFileName = null) => {
   } else {
     activeFileTab.innerHTML = ``;
   }
+
+  setCharCount();
 };
 
 // initialization
@@ -282,6 +292,10 @@ const initializeEnvironment = () => {
   body.classList.add(loadThemePreferenceFromStorage());
   files = loadFilesFromStorage();
   renderEnvironment(files, files?.[0]?.name);
+  
+  setCharCount();
+  base64EncodedTextTextArea.addEventListener('input',  setCharCount)
+
 };
 
 initializeEnvironment();
